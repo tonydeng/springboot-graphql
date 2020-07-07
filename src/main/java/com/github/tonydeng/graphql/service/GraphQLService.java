@@ -3,6 +3,7 @@ package com.github.tonydeng.graphql.service;
 import com.github.tonydeng.graphql.model.Book;
 import com.github.tonydeng.graphql.repository.BookRepository;
 import com.github.tonydeng.graphql.service.datafetcher.AllBooksDataFetcher;
+import com.github.tonydeng.graphql.service.datafetcher.BookDataFetcher;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
@@ -30,15 +31,19 @@ public class GraphQLService {
 
     private AllBooksDataFetcher allBooksDataFetcher;
 
+    private BookDataFetcher bookDataFetcher;
+
     @Value("classpath:books.graphql")
     Resource resource;
 
     private GraphQL graphQL;
 
     @Autowired
-    public GraphQLService(BookRepository bookRepository, AllBooksDataFetcher allBooksDataFetcher) {
+    public GraphQLService(BookRepository bookRepository, AllBooksDataFetcher allBooksDataFetcher,
+                          BookDataFetcher bookDataFetcher) {
         this.bookRepository = bookRepository;
         this.allBooksDataFetcher = allBooksDataFetcher;
+        this.bookDataFetcher = bookDataFetcher;
     }
 
     @PostConstruct
@@ -90,7 +95,9 @@ public class GraphQLService {
     private RuntimeWiring buildRuntimeWiring() {
         return RuntimeWiring.newRuntimeWiring()
                 .type("Query", typeWiring -> typeWiring
-                        .dataFetcher("allBooks", allBooksDataFetcher))
+                        .dataFetcher("allBooks", allBooksDataFetcher)
+                        .dataFetcher("book", bookDataFetcher)
+                )
                 .build();
     }
 
