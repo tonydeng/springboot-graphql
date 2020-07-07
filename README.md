@@ -1,7 +1,7 @@
 # SpringBoot GraphQL
 
-1. 运行GraphqlApplication
-2. 发起GraphQL请求
+1. 运行`GraphqlApplication`
+2. 发起`GraphQL`请求(`HTTP Post`)
 
 ```graphql
 {
