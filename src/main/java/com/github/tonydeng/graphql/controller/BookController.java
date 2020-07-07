@@ -29,6 +29,7 @@ public class BookController {
     @PostMapping
     public ResponseEntity<Object> getAllBooks(@RequestBody String query) {
         log.info("Entering getAllBooks@BookController......");
+        log.info("query:'{}'",query);
         ExecutionResult execute = graphQLService.getGraphQL().execute(query);
         return new ResponseEntity<>(execute, HttpStatus.OK);
     }
