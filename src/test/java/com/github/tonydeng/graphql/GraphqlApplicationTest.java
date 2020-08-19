@@ -1,21 +1,26 @@
 package com.github.tonydeng.graphql;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @author dengtao
  **/
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Slf4j
+@SpringBootTest(classes = GraphqlApplicationTest.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Slf4j(topic = "test")
 public class GraphqlApplicationTest {
 
+    @SpringBootApplication(scanBasePackages = {"com.github.tonydeng.graphql"})
+    static class SpringTestConfiguation {
+
+    }
+
     @Test
-    public void contextLoads() {
+    void testContextLoads() {
         log.info("Context Loader.......");
     }
 }
