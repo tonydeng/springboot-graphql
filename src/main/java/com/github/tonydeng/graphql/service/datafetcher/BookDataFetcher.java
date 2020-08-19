@@ -4,6 +4,7 @@ import com.github.tonydeng.graphql.model.Book;
 import com.github.tonydeng.graphql.repository.BookRepository;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,13 +13,13 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class BookDataFetcher implements DataFetcher<Book> {
-    private BookRepository bookRepository;
+
+    private final BookRepository bookRepository;
 
     @Autowired
     public BookDataFetcher(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-
 
     @Override
     public Book get(DataFetchingEnvironment dataFetchingEnvironment) {

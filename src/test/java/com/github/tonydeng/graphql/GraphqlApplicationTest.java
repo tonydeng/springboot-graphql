@@ -3,21 +3,19 @@ package com.github.tonydeng.graphql;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * @author dengtao
  **/
-@SpringBootTest(classes = GraphqlApplicationTest.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 @Slf4j(topic = "test")
 public class GraphqlApplicationTest {
 
-    @SpringBootApplication(scanBasePackages = {"com.github.tonydeng.graphql"})
-    static class SpringTestConfiguation {
-
-    }
 
     @Test
     void testContextLoads() {
